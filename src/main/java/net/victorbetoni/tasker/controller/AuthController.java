@@ -6,6 +6,8 @@ import net.victorbetoni.tasker.database.Database;
 import net.victorbetoni.tasker.exception.AuthenticationException;
 import net.victorbetoni.tasker.model.User;
 import net.victorbetoni.tasker.model.auth.Session;
+import net.victorbetoni.tasker.utils.Pair;
+import net.victorbetoni.tasker.utils.SQLUtils;
 import org.bouncycastle.util.encoders.Hex;
 
 import java.nio.charset.StandardCharsets;
@@ -23,46 +25,31 @@ public class AuthController implements Controller {
         return new Session(new User(username, name, email), System.currentTimeMillis());
     }
 
+    @SuppressWarnings("all")
     public void registerUser(String username, String name, String email, String password) throws AuthenticationException {
-        try{
-            PreparedStatement st = Database.getConnection().prepareStatement(
-                    "INSERT INTO Users VALUES (?,?,?,?)"
-            );
-            st.setString(1, username);
-            st.setString(2, name);
-            st.setString(3, email);
-            st.setString(4, password);
-            st.executeUpdate();
-            TaskTracker.setSession(openSession(username, name, email));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        SQLUtils.query("INSERT INTO Users VALUES (?,?,?,?)", Database.getConnection(), true,
+                Pair.of(String.class, username),
+                Pair.of(String.class, name),
+                Pair.of(String.class, email),
+                Pair.of(String.class, password));
     }
 
+    @SuppressWarnings("all")
     public boolean isEmailRegistered(String email) {
-        try{
-            PreparedStatement st = Database.getConnection().prepareStatement(
-                    "SELECT Email FROM Users WHERE Email LIKE ?"
-            );
-            st.setString(1, email);
-            ResultSet rs = st.executeQuery();
-            return rs.next();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        try {
+            return SQLUtils.query("SELECT Email FROM Users WHERE Email LIKE ?", Database.getConnection(), false, Pair.of(String.class, email)).get().next();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return false;
     }
 
+    @SuppressWarnings("all")
     public boolean isUsernameRegistered(String username) {
-        try{
-            PreparedStatement st = Database.getConnection().prepareStatement(
-                   "SELECT Username FROM Users WHERE Username LIKE ?"
-            );
-            st.setString(1, username);
-            ResultSet rs = st.executeQuery();
-            return rs.next();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        try {
+            return SQLUtils.query("SELECT Username FROM Users WHERE Username LIKE ?", Database.getConnection(), false, Pair.of(String.class, username)).next();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return false;
     }

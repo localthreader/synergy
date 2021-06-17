@@ -111,6 +111,7 @@ public class OrganizationView implements View{
 
         GridPane membersTextPane = new GridPane();
         membersTextPane.setPadding(new Insets(15, 0, 15, 0));
+        
         ColumnConstraints constraint = new ColumnConstraints(200);
         constraint.setHalignment(HPos.CENTER);
         constraint.setPercentWidth(100);

@@ -104,9 +104,8 @@ public class RegisterFormView implements View {
                 if(controller.isUsernameRegistered(usernameField.getText().trim()))
                     throw new AuthenticationException("Esse username já está registrado.");
 
-
-
                 controller.registerUser(usernameField.getText().trim(), nameField.getText().trim(), emailField.getText().trim(), HashUtils.sha256(passwordField.getText()));
+                TaskTracker.setSession(controller.openSession(usernameField.getText(), nameField.getText(), emailField.getText().trim()));
             } catch (AuthenticationException ex) {
                 errorText.setText(ex.getMessage());
                 errorText.setFill(Color.RED);
