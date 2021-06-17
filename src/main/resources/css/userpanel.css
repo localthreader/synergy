@@ -1,0 +1,17 @@
+#org-button {
+    -fx-pref-height: 40px;
+    -fx-pref-width: 180px;
+    -fx-text-align: center;
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+
+#org-button:hover {
+    -fx-cursor: hand;
+}
+
+#user-background {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #d4003c, #ff366f);
+}

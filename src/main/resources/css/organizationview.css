@@ -1,0 +1,37 @@
+#container {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #5b00b3, #9930ff);
+}
+
+#user {
+    -fx-pref-height: 40px;
+    -fx-pref-width: 250px;
+    -fx-text-align: center;
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-radius: 0 0 0 0;
+}
+
+#image {
+    -fx-padding: 10 25 10 25 ;
+}
+
+#widget {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-background-color: #fcfcfc;
+    -fx-border-color: #dbdbdb;
+    -fx-border-width: 1;
+}
+
+#widget:hover {
+    -fx-cursor: hand;
+}
+
+#user:hover {
+    -fx-cursor: hand;
+}
+
+#id-text {
+    -fx-cursor: hand;
+}
