@@ -69,6 +69,14 @@ CREATE TABLE IF NOT EXISTS CommonSubtasks (
     FOREIGN KEY (TaskID) REFERENCES Tasks(UniqueID)
 );
 
+CREATE TABLE IF NOT EXISTS TeamUsers (
+    Username VARCHAR(64),
+    TeamID VARCHAR(64),
+
+    FOREIGN KEY (UserID) REFERENCES Users(UniqueID),
+    FOREIGN KEY (TeamID) REFERENCES Teams(UniqueID)
+);
+
 
 
 

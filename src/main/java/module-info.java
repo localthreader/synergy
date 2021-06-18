@@ -5,5 +5,5 @@ module net.victorbetoni.tasker {
     requires mysql.connector.java;
     requires java.desktop;
     requires com.google.gson;
-    exports net.victorbetoni.tasker;
+    exports net.victorbetoni.squadster;
 }
